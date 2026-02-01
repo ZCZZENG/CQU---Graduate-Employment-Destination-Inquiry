@@ -1,0 +1,43 @@
+# 重庆大学学院列表（按学部分类） 
+## 人文学部 
+- 外国语学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=143&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 艺术学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=117&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 体育学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=141&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 美视电影学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=142&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 博雅学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=147&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- ## 社会科学学部 
+- 公共管理学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=122&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 经济与工商管理学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=121&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 新闻学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=131&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 法学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=108&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 马克思主义学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=111&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- ## 理学部 
+- 数学与统计学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=135&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 物理学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=136&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 化学化工学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=116&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 生命科学学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=127&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 弘深学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=149&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- ## 工程学部 
+- 机械与运载工程学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=128&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 电气工程学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=140&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 能源与动力工程学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=139&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 资源与安全学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=129&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 材料科学与工程学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=120&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 航空航天学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=119&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 国家（重庆）卓越工程师学院 
+- 重庆大学–辛辛那提大学联合学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=138&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- ## 建筑学部 
+- 建筑城规学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=114&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 土木工程学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=125&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 环境与生态学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=115&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 管理科学与房地产学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=118&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+## 信息学部 
+- 光电工程学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=133&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 微电子与通信工程学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=123&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 计算机学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=124&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 自动化学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=134&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 大数据与软件学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=126&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+## 医学部 
+- 医学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=150&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 药学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=137&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
+- 生物工程学院 https://cqu.cqbys.com/affair/lnjydw/search/domain/cqu/grade/23/education//school/124/major//University1950Lnjydw%5Bjylb%5D//submit/1/page/2?grade=23&education=&school=130&major=&University1950Lnjydw%5Bjylb%5D=&submit=1
