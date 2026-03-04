@@ -2,8 +2,9 @@
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
 
     "jsx": "react-jsx",
 
@@ -18,7 +19,9 @@
 
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+
+    "allowImportingTsExtensions": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
