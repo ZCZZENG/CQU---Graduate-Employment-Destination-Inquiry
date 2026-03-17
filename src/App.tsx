@@ -19,12 +19,18 @@ function App() {
     data,
     filters,
     filterOptions,
+    dynamicFilterOptions,
+    extraFilters,
     loading,
     dataSource,
     statistics,
+    dimensions,
+    uploadMessage,
     updateFilter,
+    updateExtraFilter,
     resetFilters,
     toggleDataSource,
+    uploadFile,
   } = useData();
 
   if (loading) {
@@ -68,9 +74,9 @@ function App() {
                 <Database className="w-4 h-4" />
                 <span>当前数据源:</span>
                 <span className={`font-medium ${
-                  dataSource === 'cleaned' ? 'text-blue-600' : 'text-green-600'
+                  dataSource === 'cleaned' ? 'text-blue-600' : dataSource === 'original' ? 'text-green-600' : 'text-emerald-600'
                 }`}>
-                  {dataSource === 'cleaned' ? '清洗后数据' : '原始数据'}
+                  {dataSource === 'cleaned' ? '清洗后数据' : dataSource === 'original' ? '原始数据' : '上传数据'}
                 </span>
                 <span className="text-slate-400">
                   ({statistics.recordCount.toLocaleString()} 条记录)
@@ -88,10 +94,15 @@ function App() {
           <GlobalFilters
             filters={filters}
             filterOptions={filterOptions}
+            dynamicFilterOptions={dynamicFilterOptions}
+            extraFilters={extraFilters}
             dataSource={dataSource}
             onUpdateFilter={updateFilter}
             onResetFilters={resetFilters}
+            onUpdateExtraFilter={updateExtraFilter}
             onToggleDataSource={toggleDataSource}
+            onUploadFile={uploadFile}
+            uploadMessage={uploadMessage}
             statistics={statistics}
           />
 
@@ -146,7 +157,7 @@ function App() {
               </div>
 
               {/* 图表管理器 */}
-              <ChartManager data={data} />
+              <ChartManager data={data} dimensions={dimensions} />
             </TabsContent>
 
             <TabsContent value="table">

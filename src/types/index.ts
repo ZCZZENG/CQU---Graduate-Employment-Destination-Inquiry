@@ -1,4 +1,4 @@
-// 数据记录类型
+// 数据记录类型（支持动态字段）
 export interface DataRecord {
   学部: string;
   学院: string;
@@ -7,6 +7,7 @@ export interface DataRecord {
   去向类别: string;
   单位名称: string;
   人数: number;
+  [key: string]: string | number;
 }
 
 // 筛选条件类型
@@ -32,7 +33,7 @@ export interface ChartConfig {
 }
 
 // 数据源类型
-export type DataSourceType = 'cleaned' | 'original';
+export type DataSourceType = 'cleaned' | 'original' | 'uploaded';
 
 // 筛选选项类型
 export interface FilterOptions {
@@ -43,11 +44,16 @@ export interface FilterOptions {
   categories: string[];
 }
 
+export interface DynamicFilterOption {
+  key: string;
+  values: string[];
+}
+
 // TOP20配置类型
 export interface Top20Config {
   id: string;
   title: string;
-  category: string; // '升学' | '就业' | '全部'
+  category: string;
   filterCriteria?: Partial<FilterCriteria>;
 }
 

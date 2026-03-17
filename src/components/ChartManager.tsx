@@ -7,6 +7,7 @@ import type { DataRecord } from '@/types';
 
 interface ChartManagerProps {
   data: DataRecord[];
+  dimensions: string[];
 }
 
 type ChartItem = {
@@ -14,9 +15,7 @@ type ChartItem = {
   type: 'bar' | 'line' | 'pie' | 'top20';
 };
 
-const dimensions = ['学部', '学院', '学历', '毕业年度', '去向类别', '单位名称'];
-
-export function ChartManager({ data }: ChartManagerProps) {
+export function ChartManager({ data, dimensions }: ChartManagerProps) {
   const [charts, setCharts] = useState<ChartItem[]>([
     { id: 'chart-1', type: 'bar' },
     { id: 'chart-2', type: 'pie' },
@@ -24,10 +23,7 @@ export function ChartManager({ data }: ChartManagerProps) {
   ]);
 
   const addChart = useCallback((type: ChartItem['type']) => {
-    const newChart: ChartItem = {
-      id: `chart-${Date.now()}`,
-      type,
-    };
+    const newChart: ChartItem = { id: `chart-${Date.now()}`, type };
     setCharts((prev) => [...prev, newChart]);
   }, []);
 
@@ -37,69 +33,20 @@ export function ChartManager({ data }: ChartManagerProps) {
 
   return (
     <div className="space-y-4">
-      {/* 添加图表按钮组 */}
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-sm text-slate-500 mr-2">添加图表:</span>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => addChart('bar')}
-          className="gap-2"
-        >
-          <BarChart3 className="w-4 h-4 text-blue-600" />
-          柱状图
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => addChart('line')}
-          className="gap-2"
-        >
-          <LineChart className="w-4 h-4 text-green-600" />
-          折线图
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => addChart('pie')}
-          className="gap-2"
-        >
-          <PieChart className="w-4 h-4 text-purple-600" />
-          饼图
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => addChart('top20')}
-          className="gap-2"
-        >
-          <Trophy className="w-4 h-4 text-amber-500" />
-          TOP20
-        </Button>
+        <Button variant="outline" size="sm" onClick={() => addChart('bar')} className="gap-2"><BarChart3 className="w-4 h-4 text-blue-600" />柱状图</Button>
+        <Button variant="outline" size="sm" onClick={() => addChart('line')} className="gap-2"><LineChart className="w-4 h-4 text-green-600" />折线图</Button>
+        <Button variant="outline" size="sm" onClick={() => addChart('pie')} className="gap-2"><PieChart className="w-4 h-4 text-purple-600" />饼图</Button>
+        <Button variant="outline" size="sm" onClick={() => addChart('top20')} className="gap-2"><Trophy className="w-4 h-4 text-amber-500" />TOP20</Button>
       </div>
 
-      {/* 图表网格 */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {charts.map((chart) => {
           if (chart.type === 'top20') {
-            return (
-              <Top20Chart
-                key={chart.id}
-                id={chart.id}
-                data={data}
-                onRemove={removeChart}
-              />
-            );
+            return <Top20Chart key={chart.id} id={chart.id} data={data} dimensions={dimensions} onRemove={removeChart} />;
           }
-          return (
-            <ConfigurableChart
-              key={chart.id}
-              id={chart.id}
-              data={data}
-              dimensions={dimensions}
-              onRemove={removeChart}
-            />
-          );
+          return <ConfigurableChart key={chart.id} id={chart.id} data={data} dimensions={dimensions} onRemove={removeChart} />;
         })}
       </div>
 
