@@ -11,6 +11,7 @@ import type { DataRecord } from '@/types';
 interface Top20ChartProps {
   id: string;
   data: DataRecord[];
+  dimensions: string[];
   onRemove: (id: string) => void;
 }
 
@@ -28,11 +29,17 @@ const defaultConfig: Top20Config = {
   topN: 20,
 };
 
-export function Top20Chart({ id, data, onRemove }: Top20ChartProps) {
+export function Top20Chart({ id, data, dimensions, onRemove }: Top20ChartProps) {
   const [config, setConfig] = useState<Top20Config>(defaultConfig);
   const [showSettings, setShowSettings] = useState(true);
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
+
+  useEffect(() => {
+    if (!dimensions.includes(config.dimension) && dimensions.length > 0) {
+      setConfig((prev) => ({ ...prev, dimension: dimensions[0] }));
+    }
+  }, [config.dimension, dimensions]);
 
   // 初始化图表
   useEffect(() => {
@@ -57,15 +64,7 @@ export function Top20Chart({ id, data, onRemove }: Top20ChartProps) {
     
     // 按去向类别筛选
     if (config.category !== '全部') {
-      if (config.category === '升学') {
-        filtered = data.filter((r) => r.去向类别 === '升学');
-      } else if (config.category === '就业') {
-        filtered = data.filter((r) => r.去向类别 === '就业');
-      } else if (config.category === '出国(境)') {
-        filtered = data.filter((r) => r.去向类别 === '出国(境)留学或工作');
-      } else if (config.category === '选调生') {
-        filtered = data.filter((r) => r.去向类别 === '选调生');
-      }
+      filtered = data.filter((r) => String(r.去向类别) === config.category);
     }
     
     const map = new Map<string, number>();
@@ -218,7 +217,7 @@ export function Top20Chart({ id, data, onRemove }: Top20ChartProps) {
                   <SelectItem value="全部" className="text-xs">全部</SelectItem>
                   <SelectItem value="升学" className="text-xs">升学</SelectItem>
                   <SelectItem value="就业" className="text-xs">就业</SelectItem>
-                  <SelectItem value="出国(境)" className="text-xs">出国(境)</SelectItem>
+                  <SelectItem value="出国(境)留学或工作" className="text-xs">出国(境)留学或工作</SelectItem>
                   <SelectItem value="选调生" className="text-xs">选调生</SelectItem>
                 </SelectContent>
               </Select>
@@ -234,10 +233,9 @@ export function Top20Chart({ id, data, onRemove }: Top20ChartProps) {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="单位名称" className="text-xs">单位名称</SelectItem>
-                  <SelectItem value="学院" className="text-xs">学院</SelectItem>
-                  <SelectItem value="学部" className="text-xs">学部</SelectItem>
-                  <SelectItem value="学历" className="text-xs">学历</SelectItem>
+                  {dimensions.map((dim) => (
+                    <SelectItem key={dim} value={dim} className="text-xs">{dim}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>

@@ -39,6 +39,12 @@ export function ConfigurableChart({ id, data, dimensions, onRemove }: Configurab
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
 
+  useEffect(() => {
+    if (!dimensions.includes(config.dimension) && dimensions.length > 0) {
+      setConfig((prev) => ({ ...prev, dimension: dimensions[0] }));
+    }
+  }, [config.dimension, dimensions]);
+
   // 初始化图表
   useEffect(() => {
     if (chartRef.current) {
