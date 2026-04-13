@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Plus, BarChart3, LineChart, PieChart, Trophy } from 'lucide-react';
+import { Plus, BarChart3, LineChart, PieChart, Donut, Trophy } from 'lucide-react';
 import { ConfigurableChart } from './ConfigurableChart';
 import { Top20Chart } from './Top20Chart';
 import type { DataRecord } from '@/types';
@@ -12,13 +12,13 @@ interface ChartManagerProps {
 
 type ChartItem = {
   id: string;
-  type: 'bar' | 'line' | 'pie' | 'top20';
+  type: 'bar' | 'line' | 'pie' | 'donut' | 'top20';
 };
 
 export function ChartManager({ data, dimensions }: ChartManagerProps) {
   const [charts, setCharts] = useState<ChartItem[]>([
     { id: 'chart-1', type: 'bar' },
-    { id: 'chart-2', type: 'pie' },
+    { id: 'chart-2', type: 'donut' },
     { id: 'chart-3', type: 'top20' },
   ]);
 
@@ -37,7 +37,8 @@ export function ChartManager({ data, dimensions }: ChartManagerProps) {
         <span className="text-sm text-slate-500 mr-2">添加图表:</span>
         <Button variant="outline" size="sm" onClick={() => addChart('bar')} className="gap-2"><BarChart3 className="w-4 h-4 text-blue-600" />柱状图</Button>
         <Button variant="outline" size="sm" onClick={() => addChart('line')} className="gap-2"><LineChart className="w-4 h-4 text-green-600" />折线图</Button>
-        <Button variant="outline" size="sm" onClick={() => addChart('pie')} className="gap-2"><PieChart className="w-4 h-4 text-purple-600" />饼图</Button>
+        <Button variant="outline" size="sm" onClick={() => addChart('pie')} className="gap-2"><PieChart className="w-4 h-4 text-purple-600" />扇形图</Button>
+        <Button variant="outline" size="sm" onClick={() => addChart('donut')} className="gap-2"><Donut className="w-4 h-4 text-pink-500" />环形图</Button>
         <Button variant="outline" size="sm" onClick={() => addChart('top20')} className="gap-2"><Trophy className="w-4 h-4 text-amber-500" />TOP20</Button>
       </div>
 
@@ -46,7 +47,16 @@ export function ChartManager({ data, dimensions }: ChartManagerProps) {
           if (chart.type === 'top20') {
             return <Top20Chart key={chart.id} id={chart.id} data={data} dimensions={dimensions} onRemove={removeChart} />;
           }
-          return <ConfigurableChart key={chart.id} id={chart.id} data={data} dimensions={dimensions} onRemove={removeChart} />;
+          return (
+            <ConfigurableChart
+              key={chart.id}
+              id={chart.id}
+              data={data}
+              dimensions={dimensions}
+              onRemove={removeChart}
+              initialType={chart.type as 'bar' | 'line' | 'pie' | 'donut'}
+            />
+          );
         })}
       </div>
 

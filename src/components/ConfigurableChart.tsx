@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { X, Settings, BarChart3, LineChart, PieChart, GripVertical } from 'lucide-react';
+import { X, Settings, BarChart3, LineChart, PieChart, Donut, GripVertical } from 'lucide-react';
 import * as echarts from 'echarts';
 import type { DataRecord } from '@/types';
 
@@ -13,10 +13,11 @@ interface ConfigurableChartProps {
   data: DataRecord[];
   dimensions: string[];
   onRemove: (id: string) => void;
+  initialType?: 'bar' | 'line' | 'pie' | 'donut';
 }
 
 interface ChartConfig {
-  type: 'bar' | 'line' | 'pie';
+  type: 'bar' | 'line' | 'pie' | 'donut';
   title: string;
   dimension: string;
   metric: 'sum' | 'percent';
@@ -24,17 +25,15 @@ interface ChartConfig {
   yAxisLabel: string;
 }
 
-const defaultConfig: ChartConfig = {
-  type: 'bar',
-  title: '新建图表',
-  dimension: '学部',
-  metric: 'sum',
-  xAxisLabel: '维度',
-  yAxisLabel: '人数',
-};
-
-export function ConfigurableChart({ id, data, dimensions, onRemove }: ConfigurableChartProps) {
-  const [config, setConfig] = useState<ChartConfig>(defaultConfig);
+export function ConfigurableChart({ id, data, dimensions, onRemove, initialType = 'bar' }: ConfigurableChartProps) {
+  const [config, setConfig] = useState<ChartConfig>({
+    type: initialType,
+    title: '新建图表',
+    dimension: '学部',
+    metric: 'sum',
+    xAxisLabel: '维度',
+    yAxisLabel: '人数',
+  });
   const [showSettings, setShowSettings] = useState(true);
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
@@ -104,7 +103,8 @@ export function ConfigurableChart({ id, data, dimensions, onRemove }: Configurab
   useEffect(() => {
     if (!chartInstance.current) return;
 
-    const isPie = config.type === 'pie';
+    const isRound = config.type === 'pie' || config.type === 'donut';
+    const isDonut = config.type === 'donut';
     const yAxisName = config.metric === 'percent' ? '占比(%)' : config.yAxisLabel;
 
     const option: echarts.EChartsOption = {
@@ -118,26 +118,26 @@ export function ConfigurableChart({ id, data, dimensions, onRemove }: Configurab
         },
       },
       tooltip: {
-        trigger: isPie ? 'item' : 'axis',
-        formatter: config.metric === 'percent' 
-          ? '{b}: {c}%' 
-          : isPie ? '{b}: {c}人 ({d}%)' : '{b}: {c}人',
+        trigger: isRound ? 'item' : 'axis',
+        formatter: config.metric === 'percent'
+          ? '{b}: {c}%'
+          : isRound ? '{b}: {c}人 ({d}%)' : '{b}: {c}人',
       },
-      legend: isPie ? {
+      legend: isRound ? {
         type: 'scroll',
         orient: 'vertical',
         right: 10,
         top: 40,
         bottom: 20,
       } : undefined,
-      grid: isPie ? undefined : {
+      grid: isRound ? undefined : {
         left: '3%',
         right: '4%',
         bottom: '15%',
         top: '20%',
         containLabel: true,
       },
-      xAxis: isPie ? undefined : {
+      xAxis: isRound ? undefined : {
         type: 'category',
         data: chartData.map((d) => d.name),
         axisLabel: {
@@ -149,33 +149,35 @@ export function ConfigurableChart({ id, data, dimensions, onRemove }: Configurab
         nameLocation: 'middle',
         nameGap: 30,
       },
-      yAxis: isPie ? undefined : {
+      yAxis: isRound ? undefined : {
         type: 'value',
         name: yAxisName,
         nameTextStyle: {
           padding: [0, 0, 0, 20],
         },
       },
-      series: [
-        {
-          type: config.type,
-          data: isPie 
-            ? chartData.map((d) => ({ name: d.name, value: d.value }))
-            : chartData.map((d) => d.value),
-          radius: isPie ? ['40%', '70%'] : undefined,
-          center: isPie ? ['40%', '55%'] : undefined,
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
+      series: isRound
+        ? [
+            {
+              type: 'pie' as const,
+              data: chartData.map((d) => ({ name: d.name, value: d.value })),
+              radius: isDonut ? ['40%', '70%'] : '65%',
+              center: ['40%', '55%'],
+              emphasis: {
+                itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.5)' },
+              },
+              label: { show: false },
             },
-          },
-          label: isPie ? {
-            show: false,
-          } : undefined,
-        },
-      ],
+          ]
+        : [
+            {
+              type: config.type as 'bar' | 'line',
+              data: chartData.map((d) => d.value),
+              emphasis: {
+                itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.5)' },
+              },
+            },
+          ],
       color: [
         '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6',
         '#ec4899', '#06b6d4', '#84cc16', '#f97316', '#6366f1',
@@ -199,6 +201,7 @@ export function ConfigurableChart({ id, data, dimensions, onRemove }: Configurab
             {config.type === 'bar' && <BarChart3 className="w-4 h-4 text-blue-600" />}
             {config.type === 'line' && <LineChart className="w-4 h-4 text-green-600" />}
             {config.type === 'pie' && <PieChart className="w-4 h-4 text-purple-600" />}
+            {config.type === 'donut' && <Donut className="w-4 h-4 text-pink-500" />}
             <CardTitle className="text-sm font-medium text-slate-700">
               {config.title}
             </CardTitle>
@@ -231,7 +234,7 @@ export function ConfigurableChart({ id, data, dimensions, onRemove }: Configurab
               <Label className="text-xs text-slate-500">图表类型</Label>
               <Select
                 value={config.type}
-                onValueChange={(value) => updateConfig('type', value as 'bar' | 'line' | 'pie')}
+                onValueChange={(value) => updateConfig('type', value as 'bar' | 'line' | 'pie' | 'donut')}
               >
                 <SelectTrigger className="h-7 text-xs">
                   <SelectValue />
@@ -239,7 +242,8 @@ export function ConfigurableChart({ id, data, dimensions, onRemove }: Configurab
                 <SelectContent>
                   <SelectItem value="bar" className="text-xs">柱状图</SelectItem>
                   <SelectItem value="line" className="text-xs">折线图</SelectItem>
-                  <SelectItem value="pie" className="text-xs">饼图</SelectItem>
+                  <SelectItem value="pie" className="text-xs">扇形图</SelectItem>
+                  <SelectItem value="donut" className="text-xs">环形图</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -289,7 +293,7 @@ export function ConfigurableChart({ id, data, dimensions, onRemove }: Configurab
               />
             </div>
 
-            {config.type !== 'pie' && (
+            {config.type !== 'pie' && config.type !== 'donut' && (
               <>
                 <div className="space-y-1">
                   <Label className="text-xs text-slate-500">X轴名称</Label>
