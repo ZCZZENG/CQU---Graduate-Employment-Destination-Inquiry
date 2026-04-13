@@ -173,12 +173,6 @@ export function GlobalFilters({
           </div>
         )}
 
-        <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap gap-4">
-          <div className="flex items-center gap-2"><span className="text-xs text-slate-500">总人数:</span><span className="text-sm font-semibold text-blue-600">{statistics.totalCount.toLocaleString()}</span></div>
-          <div className="flex items-center gap-2"><span className="text-xs text-slate-500">单位数:</span><span className="text-sm font-semibold text-green-600">{statistics.uniqueUnits}</span></div>
-          <div className="flex items-center gap-2"><span className="text-xs text-slate-500">学院数:</span><span className="text-sm font-semibold text-purple-600">{statistics.uniqueColleges}</span></div>
-          <div className="flex items-center gap-2"><span className="text-xs text-slate-500">记录数:</span><span className="text-sm font-semibold text-slate-700">{statistics.recordCount.toLocaleString()}</span></div>
-        </div>
       </CardContent>
     </Card>
   );
