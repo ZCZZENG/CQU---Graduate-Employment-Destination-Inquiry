@@ -1,73 +1,157 @@
-# React + TypeScript + Vite
+# CQU Graduate Employment Insights
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 基于重庆大学校内公开可查询的历史毕业去向信息，对毕业生去向进行匿名聚合、结构化整理与可视化分析的学习型项目。
 
-Currently, two official plugins are available:
+在线版本：
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 前端（React + Vite，部署在 Vercel）：<https://cqu-graduate-employment-destination.vercel.app/>
+- 飞书多维表（功能更全，推荐）：<https://my.feishu.cn/base/NIShb6YLSa5I4qssa28cTGOfnCf>
 
-## React Compiler
+> **给 CQU-openlib 集成**：只需要数据和处理逻辑的话，直接看 [五、数据文件](#五数据文件) 和 [六、数据处理管线](#六数据处理管线) 两节，前端代码可整体忽略。数据可直接用于并入主站。
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 一、项目概述
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+在就业、升学与政策环境快速变化的背景下，学生做专业选择、发展路径判断时往往只能依赖零散经验或个体样本。本项目基于重庆大学 **学生端可查询的历史毕业去向汇总信息**，通过统一口径的清洗、合并与结构分析，呈现不同学院、学部、学历层次下的去向结构特征，用于就业认知与数据分析方法示例。
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 二、数据覆盖范围
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **学院 / 学部**：34 个学院，按学校组织结构归入 7 大学部（完整清单和每个学院的 `school_id` 见 [`各个学院URL.md`](./各个学院URL.md)）
+- **毕业届次**：2021–2023 届，不混用跨区间或零散年份
+- **学历层次**：本科、硕士为主要分析对象；博士样本量小，单独整理展示，不纳入主要结构对比
+
+---
+
+## 三、数据来源与合规边界
+
+### 数据来源
+
+重庆大学毕业生就业信息网「往届生查询」：<https://cqu.cqbys.com/affair/lnjydw>
+
+- 学生统一身份认证登录后 **公开可查**
+- 查询结果本身是 **单位级汇总人数**，页面原始字段只有 4 个：`毕业年度` / `去向类别` / `单位名称` / `人数`
+- 不含姓名、学号、联系方式、专业
+
+### 数据处理原则
+
+- 不包含任何个人信息（姓名 / 学号 / 联系方式 / 个人记录）
+- 仅使用匿名聚合后的统计结果
+- 不提供、不存储、不还原个人级原始数据
+
+### 合规现状（如实说明）
+
+- 数据是就业信息网学生端 **公开可查的匿名汇总**，本工具只做前端展示，无后端、不存任何个人级数据
+- 曾向机械学院辅导员提交过 v1.0 试点报告并获认可；也尝试过走就业中心的正式数据上报流程，未推进下去
+- **目前没有学校层面的正式授权背书**，属于学生自发的探索性质，从未大规模公开推广，一直保持「如有不合规风险随时下线」的态度
+
+---
+
+## 四、统一分析口径（核心规则）
+
+为保证跨学院、跨学部分析的一致性，所有数据遵循以下规则。
+
+### 1. 粒度只到学院，不做专业级
+
+精确到「专业 + 小方向 + 单位」有反推到具体个人的风险，主动放弃。所有统计以「学部 / 学院 / 学历 / 届次 / 去向类别」为维度。
+
+### 2. 低频去向归入「其他」
+
+**在「就业」类别下，本科 / 硕士单个 `(学院 × 学历 × 届次)` 内某单位人数 < 2 的，单位名替换为「其他」后重新聚合。**
+
+- 升学 / 出国不做此处理——学校名本身不敏感
+- 博士不做此处理——样本太小，保留原样但整体谨慎解读
+- 目的是降低偶然性噪声，同时避免「1 人去某单位」被反推
+
+### 3. 单位名称规范化
+
+- **高校类**：精确匹配，不合并不同高校或校区
+- **企业类**：集团级归并——剥离地域前缀（重庆 / 中国…）、法定后缀（有限公司 / 股份有限公司…）、分支机构词（分公司 / 子公司 / 办事处…），抽出「公司主体」，同主体合并；展示名取该主体下人数最多的原始名。合并规则可通过显式的 `special_cases` 特例映射表补充
+
+### 4. 双版本数据
+
+保留 `data_original`（完整粒度）+ `data_cleaned`（应用上述 #2 后）两份。小学院用 cleaned 筛完可能大半是「其他」，这时用 original 看整体结构；对外展示默认用 cleaned。
+
+---
+
+## 五、数据文件
+
+`public/data/` 下三个 JSON，仓库根目录另附对应 CSV（`utf-8-sig`）：
+
+| 文件 | 说明 | 行数 |
+|---|---|---|
+| `data_original.json` / `data_original.csv` | 完整粒度汇总（每个单位单列，含 1 人的单位） | ~18200 |
+| `data_cleaned.json` / `data_cleaned.csv` | 应用「四.2 低频归其他」后，用于对外展示 | ~7700 |
+| `filter_options.json` | 前端筛选项枚举（学部 / 学院 / 学历 / 年份 / 去向类别） | — |
+
+每行结构一致：
+
+```json
+{
+  "学部": "工程学部",
+  "学院": "机械与运载工程学院",
+  "学历": "本科",
+  "毕业年度": 2023,
+  "去向类别": "就业",
+  "单位名称": "比亚迪",
+  "人数": 12
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+`去向类别` 取值：`升学` / `就业` / `出国(境)留学或工作` / `选调生` / `志愿服务西部计划`。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 六、数据处理管线
+
+按逻辑顺序。脚本在仓库根目录，都是一次性跑的，文件头路径写死为本地 `C:\Users\...`，**集成时按逻辑重写即可，不必复用脚本本身**。
+
+| # | 脚本 | 作用 |
+|---|---|---|
+| 1 | `就业系统数据爬取.py` | 读 `各个学院URL.md` 里的 `学部 / 学院 / school_id`，对 `34 学院 × 3 届 × 3 学历` 遍历查询页，正则解析 `<li title>` 块（每 4 个 = 年度 / 类别 / 单位 / 人数）；学院级断点续跑 + 限速 + 指数退避重试，落 `master_raw.csv` |
+| 2 | `学部修正.py` | 按 `school_id` 把 `学部 / 学院` 强制对齐到 `各个学院URL.md` 的标准命名（抓取时页面偶有错挂） |
+| 3 | `全校就业中心公司去重（去子公司）.py` | 口径 四.3：企业类单位名规范化、子公司归并主体 |
+| 4 | `同一届内-本科-硕士分别判断归其他.py` | 口径 四.2：`就业 且 学历∈{本科,硕士} 且 人数<2` → 「其他」，重新聚合 |
+| 5 | 导出 | 汇总表转成 `public/data/*.json`（及根目录 `*.csv`）供前端读取 |
+
+`学院系统分批次爬取.py`、`首先处理多余公司代码.py`、`数据转excel代码.py` 是早期只跑机械学院时的版本，逻辑相同，保留作参考。
+
+---
+
+## 七、分析定位与声明
+
+### 非排名、非评价
+
+本项目 **不用于** 学院 / 专业优劣排名、就业质量评判、对个体或群体的价值判断。分析目标是 **去向结构分布与选择模式**，而非就业质量评价。
+
+### 不可比性
+
+不同学院 / 学部在行业集中度、单一头部单位吸纳规模、地域性分公司数量、招生结构上差异显著，**结构差异 ≠ 结果优劣**。
+
+### 口径可调整
+
+上述口径是在「34 学院 / 7 学部规模 + 一致性与可维护性优先」前提下的阶段性选择，不是唯一正确解。分析目标变化（如聚焦单一学院画像、个体路径研究）时口径应随之调整。
+
+### 项目立场
+
+学生个人的学习型、探索性数据分析项目，不代表任何学院 / 学部 / 学校官方立场。规则或表述有不当之处欢迎讨论改进。
+
+---
+
+## 八、前端
+
+```bash
+pnpm install
+pnpm dev      # 本地开发
+pnpm build    # 产物在 dist/
 ```
+
+数据从 `public/data/*.json` 读取，替换这三个文件即可更新内容。
+
+---
+
+## 九、授权
+
+数据与处理脚本可用于 CQU-openlib 的集成。前端代码 MIT。数据仅供学习与分析示例，请勿用于商业用途、招生宣传、排名发布或断章取义的结论传播。
